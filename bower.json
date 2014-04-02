@@ -1,0 +1,18 @@
+{
+  "name": "notes",
+  "version": "0.0.0",
+  "homepage": "https://github.com/zetway/notes",
+  "description": "evernote clone",
+  "authors": [
+    "zetway"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
