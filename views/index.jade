@@ -1,5 +1,11 @@
 extends layout
 
+block leftbar
+	ul.notes-nav
+		li Item1
+		li Item2
+		li Item3
 block content
-  h1= title
-  p Welcome to #{title}
+	textarea#text.text(rows="20" cols="50")
+	br
+	button#submit.submit Submit
