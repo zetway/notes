@@ -1,0 +1,46 @@
+.wrapper{
+	margin-top:30px;
+}
+.container{	
+	width: 900px;
+	margin: 0 auto;
+	text-align: center;
+	background: #fff;
+	padding: 40px;
+	float: left;
+}
+.content{
+	float: left;
+	width: 600px;
+}
+.left-bar{
+	float:left;
+	width: 200px;
+}
+.text{
+	width: 60%;
+	background: #fff;
+	height: 200px;
+}
+body{
+	background: #eee;
+}
+ul.notes-nav{
+	list-style-type: none;
+}
+ul.notes-nav li{
+	height: 30px;
+	min-width: 100px;
+	color: #fff;
+	background: #e22;
+	border: #000 1px solid;
+	cursor: pointer;
+	margin: 6px 0;
+	line-height: 27px;
+	transition: background, 0.1s;
+}
+ul.notes-nav li:hover{
+	background: #f44;
+	
+	border: #fff 1px solid;
+}
