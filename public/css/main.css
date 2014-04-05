@@ -43,3 +43,6 @@ ul.notes-nav li:hover{
 	background: #f44;	
 	border: #f99 1px solid;
 }
+.no-display{
+	display: none;
+}

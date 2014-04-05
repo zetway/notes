@@ -1,6 +1,10 @@
 extends layout
 
 block leftbar
+	button(id='addNew') +
+	div(id='addNewCont' class='addNewCont no-display')
+		input(type='text' name='addNewTxt' id="addNewTxt")
+		button(id='go') GO
 	ul#notes-nav.notes-nav		
 block content
 	textarea#text.text(rows="20" cols="50")
