@@ -1,33 +1,34 @@
-var slct = {
-	btn: 'button#submit',
-	txt: 'textarea#text'
-};
-
-
-var note = Notes.get("a1");
-
-if (note){
-
-	$(slct.txt).val(note);
+function Note(id, name, path, title, text, storage){
+	this.id = id;
+	this.name = name;	
+	this.path = path;
+	this.title = title;
+	this.text = text;	
 }
-$(slct.btn).on('click', function(){
-	
-	localStorage["a1"] = $(slct.txt).val();
-	
-});
 
-$('#addNew').on('click', function(){
-	$('#addNewCont').toggleClass('no-display');
-	var vals = "+-";
-	var index = vals.indexOf($(this).html());
-	index = index === 0 ? 1 : 0;
-	$(this).html(vals[index]);
-});
-$('#go').on('click', function(){
-	var val = $('#addNewTxt').val();
-	if (val === "")
-		return;
-	Notes.addByName(val);
-	NotesList.trigger('noteAdded', val);
-});
+var NotesStorage =  {	
+	notes: [], 	
+	lastId: 0,
+	init: function(){
+		this.lastId = localStorage.getItem("lastId");
+		this.notes = localStorage.getItem("notes") || [];
+	},
+	addByName: function(name){
+		
+		this.lastId++;
+		var newNote = new Note(this.lastId, name, "null", "null", "null", "null");
+		this.addNote(newNote);		
+		return newNote;
+	},
+	addNote : function(note){
+		var noteNoText = note;
+		noteNoText.text = "";
+		this.notes.push(noteNoText);		
+		localStorage.setItem(String(note.id), note)
+	},
+	persistNotes: function(){
+		localStorage.setItem("notes", this.notes)
+	}	
 
+};
+NotesStorage.init();
