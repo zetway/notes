@@ -1,12 +1,12 @@
 extends layout
 
 block leftbar
-	button(id='addNew') +
-	div(id='addNewCont' class='addNewCont no-display')
-		input(type='text' name='addNewTxt' id="addNewTxt")
-		button(id='go') GO
-	ul#notes-nav.notes-nav		
+  button#addNew +
+  div#addNewCont.addNewCont.no-display
+    input#addNewTxt(type='text' name='addNewTxt')
+    button#go GO
+    ul#notes-nav.notes-nav		
 block content
-	textarea#text.text(rows="20" cols="50")
-	br
-	button#submit.submit Submit
+  textarea#text.text(rows="20" cols="50")
+  br
+  button#submit.submit Submit
