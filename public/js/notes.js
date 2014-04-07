@@ -23,12 +23,16 @@ var NotesStorage =  {
 	addNote : function(note){
 		var noteNoText = note;
 		noteNoText.text = "";
-		this.notes.push(noteNoText);		
+		this.notes.push(noteNoText);
+		//console.log("inside NotesStorage addNote, setting this note");
+		//console.log(note);
 		localStorage.setItem(String(note.id), note)
 	},
 	persistNotes: function(){
 		localStorage.setItem("notes", this.notes)
-	}	
-
+	},
+	get: function(id){
+		return localStorage.getItem(id);
+	},
 };
 NotesStorage.init();

@@ -1,40 +1,32 @@
 var NoteModel = Backbone.Model.extend({
-	defaults: {
-		id: "0",
+	defaults: {		
 		title: "defTitle",
-		name: "defName",
-		path: "defPath",
-		text: "defText"
 	}
 });
 
 var NotesCol = Backbone.Collection.extend({
-	url: '/noteslist',
+
+	initialize: function(){
+		this.models = NotesStorage.notes;		
+	},
 	model: NoteModel,
 });
 
-var NotesListView = Backbone.View.extend({	
-	el: "ul#notes-nav",
-	template: " \
-		<% _.each(notesCol, function(note) {  %> \
-			<li> <%= note.title %></li> \
-			<% }); %> \
-	",
-	getNotes: function(){
-		this.notes = Notes.getAll();
+notesCol = new NotesCol();
+
+var NotesListView = Backbone.View.extend({
+	events : {
+		'click button' : 'showNote'
 	},
+	el: $("ul#notes-nav"),
 	render: function(){		
-		
-		var template = _.template(
-			this.template, 
-			{
-				notesCol: this.notes
-			}
-		);
-		this.$el.html(template);
-		//that.$el.html("fetch success");
-			
-		
+		var template = $("#notes-list-tpl").html();		
+		html = _.template(template, {notesCol: this.model});
+		this.$el.html(html);
+		console.log(2);
+	},
+	showNote: function(){
+		console.log("1");
 	},
 });
 
@@ -44,18 +36,12 @@ var Router = Backbone.Router.extend({
 	}
 });
 
-var notesListView = new NotesListView();
+var notesListView = new NotesListView({model: notesCol});
 
 var router = new Router();
 router.on('route:home', function(){
 	notesListView.render();
 });
 
-/*
-_.extend(NotesListView, Backbone.Events);
-NotesListView.on("noteAdded", function(note) {
-  if(note) Notes.getAll();
-  
-});
-*/
+
 Backbone.history.start();

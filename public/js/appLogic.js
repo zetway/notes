@@ -5,11 +5,15 @@ $('#addNew').on('click', function(){
 	index = index === 0 ? 1 : 0;
 	$(this).html(vals[index]);
 });
+/*
 $('#go').on('click', function(){
 	var val = $('#addNewTxt').val();
 	if (val === "")
 		return;
-	var id = NotesStorage.addByName(val);
-	
-});
+	var note = NotesStorage.addByName(val);	
+	notesCol.push(note);
 
+	console.log("inside onclick of #go. notesCol");
+	console.log(typeof(notesCol));
+});
+*/
