@@ -1,11 +1,3 @@
-function Note(id, name, path, title, text, storage){
-	this.id = id;
-	this.name = name;	
-	this.path = path;
-	this.title = title;
-	this.text = text;	
-}
-
 var NotesStorage =  {	
 	notes: [], 	
 	lastId: 0,
@@ -13,10 +5,15 @@ var NotesStorage =  {
 		this.lastId = localStorage.getItem("lastId");
 		this.notes = localStorage.getItem("notes") || [];
 	},
-	addByName: function(name){
+	addByTitle: function(title){
 		
 		this.lastId++;
-		var newNote = new Note(this.lastId, name, "null", "null", "null", "null");
+		var newNote = {
+			id: this.lastId, 
+			title: title,
+			text: "",
+			path: "/"			
+		};
 		this.addNote(newNote);		
 		return newNote;
 	},
@@ -24,8 +21,6 @@ var NotesStorage =  {
 		var noteNoText = note;
 		noteNoText.text = "";
 		this.notes.push(noteNoText);
-		//console.log("inside NotesStorage addNote, setting this note");
-		//console.log(note);
 		localStorage.setItem(String(note.id), note)
 	},
 	persistNotes: function(){

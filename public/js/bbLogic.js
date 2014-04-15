@@ -1,14 +1,48 @@
-var NotesListView = Backbone.View.extend({
-	events: {
-		'click #go' : 'render',
-		'click #addNew' : 'render',
-	},
-	el: "ul#notes-nav",
-	render: function(){		
-		console.log("1");
+var NoteModel = Backbone.Model.extend({
+	defaults: {
+		title : name,
+		path : '/',
+		text : ""
 	}
+});
+var NotesList = Backbone.Collection.extend({
+    model: NoteModel
+});
+var NotesListView = Backbone.View.extend({
+	el: "#left-bar",
+	initialize: function() {
+		_.bindAll(this, 'render', 'toggleDisplayAdd');		
+		this.render();
+		notesList.add(NotesStorage.notes);
+	},
+	events: {		
+		'click button#add' : 'addItem',
+		'click button#addNew' : 'toggleDisplayAdd',
+		'click button#go' : 'addNote',
+	},
 	
+	render: function(){		
+			
+	},
+	
+	toggleDisplayAdd: function(){
+		$('#addNewCont').toggleClass('no-display');
+	},
+
+	addNote: function() {
+		//check textbox
+		var name = $('#addNewTxt').val();
+		if(name == "")
+			return;
+		//call API to add note
+		var tmpNote = NotesStorage.addByTitle(name);
+		//update own collection
+		notesList.add([tmpNote]);
+		//render this view
+		this.render();
+	},
 });
 
-var notesListView = new NotesListView();
 
+var notesList = new NotesList();
+var notesListView = new NotesListView();
