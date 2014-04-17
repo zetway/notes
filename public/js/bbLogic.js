@@ -1,7 +1,6 @@
 var NoteModel = Backbone.Model.extend({
 	defaults: {
-		title : 'name',
-		path : '/',
+		title : 'name',		
 		text : ''
 	}
 });
@@ -9,7 +8,7 @@ var NotesList = Backbone.Collection.extend({
     model: NoteModel
 });
 var NotesListView = Backbone.View.extend({
-	el: "#left-bar",
+	el: ".container",
 	listEl: 'ul#notes-nav',
 	templ8: "<% _.each(notesCol, function(note) { %> \
 			<li id='<%=note.get('id')%>'> <%= note.get('title') %> </li> \
@@ -18,8 +17,7 @@ var NotesListView = Backbone.View.extend({
 	",
 	currentNote: undefined,
 
-	initialize: function() {
-		_.bindAll(this, 'render', 'toggleDisplayAdd');		
+	initialize: function() {				
 		notesList.add(NotesStorage.notes);
 		this.render();
 	},
@@ -45,16 +43,18 @@ var NotesListView = Backbone.View.extend({
 	addNote: function() {		
 		var name = $('#addNewTxt').val();
 		if(name == "")
-			return;		
-		var tmpNote = NotesStorage.addByTitle(name);
+			return;
+		var note = new NoteModel({title: name});
+		NotesStorage.add(note.attributes);
 		
-		notesList.add([tmpNote]);		
+		notesList.add([note]);		
 		this.render();
 	},
 	showNote: function(evt) {
 		
 		var id = evt.toElement.id;
 		this.currentNote = id;
+		
 		var note = NotesStorage.get(id);
 		$('.title').html(note.title);
 		console.log(note.text);
@@ -62,7 +62,8 @@ var NotesListView = Backbone.View.extend({
 	},
 	saveNote: function(){
 		var text = $('#text').val();
-		NotesStorage.update(id, text);
+		
+		NotesStorage.update(this.currentNote, text);
 	}
 });
 
