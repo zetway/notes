@@ -10,6 +10,11 @@ var NotesList = Backbone.Collection.extend({
 });
 var NotesListView = Backbone.View.extend({
 	el: "#left-bar",
+	templ8: "<% _.each(notesCol, function(note) { \
+			<li> <%= note.title %> </li> \
+			<% }); %> \
+		      \
+	",
 	initialize: function() {
 		_.bindAll(this, 'render', 'toggleDisplayAdd');		
 		this.render();
@@ -22,7 +27,7 @@ var NotesListView = Backbone.View.extend({
 	},
 	
 	render: function(){		
-			
+		var template = _.template	
 	},
 	
 	toggleDisplayAdd: function(){
